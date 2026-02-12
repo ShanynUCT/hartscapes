@@ -24,6 +24,61 @@ const testimonials = [
     quote: "I’d like to give a huge shout out to Dee and her fantastic team from Hartscapes for everything they did in our garden after our home renovation. No job was too much trouble. And everything done efficiently and with a smile. Honestly they are the best thing ever!",
     author: "Vanessa W.",
     location: "Cape Town"
+  },
+  {
+    quote: "When so many suppliers heard my vision and said it couldn’t be done, Dee said, “Let’s make it happen.” When others quoted prices that made me want to give up, Dee’s quote was fair and realistic. When others sent me glossy, fake photos, Dee showed me honest examples of real work. From the first conversation, I knew I could trust Dee and the Hartscapes team. They listened, kept me updated, and treated my garden as if it were their own. The transformation is incredible — we’ve gone from an overgrown, thorn infested, patchy, uneven sloped space to a breathtaking garden we can truly live in. We’ve already had our first family camp-out on our new lawn, with the kids laughing under the stars. Now every summer day feels like a small holiday in our own backyard. Thank you, Dee and team, for bringing our vision to life with such honesty, care, and skill. We couldn’t be happier.",
+    author: "Su Little",
+    location: "Cape Town"
+  },
+  {
+    quote: "Dee and her team spent two weeks with us doing a splendid job excavating and reshaping our driveway and managing eventualities. They are all knowledgeable, professional and kind. It was a great experience.",
+    author: "Prof Johannes",
+    location: "Cape Town"
+  },
+  {
+    quote: "Dee is so knowledgeable when is comes to plants and landscaping. As newbies she did not see us as a open chequebook, but instead guided us in spending the money in the right places and ultimately getting the best value four our future investment, good communication, timelines discussed and reached.\n\nMyself and my Wife Love our new Garden and thanks to Dee and her professional and Knowledgable Team they made our vision come alive!!!\n\nWe will highly recommend Dee and her Hartscapes Team!!!",
+    author: "Johan",
+    location: "Cape Town"
+  },
+  {
+    quote: "Dee and her team were great. Very responsive, on time, flexible to ideas and good work ethic. Would definitely recommend her services",
+    author: "Zulfa",
+    location: "Cape Town"
+  },
+  {
+    quote: "We’ve just had our lawn garden changed to a gravel garden. We kind of knew what we wanted and then we found Dee of Hartscapes who created such a lovely space. She did the most amazing job which was far beyond our expectations. She has such good ideas and they were perfectly executed by her and her great team. Regarding the quote, we received it very quickly. She is really wonderful to deal with.",
+    author: "Veretta",
+    location: "Cape Town"
+  },
+  {
+    quote: "We are more than pleased with the work done by Hartscapes! Dee contacted us almost immediately after requesting a quote via bark. com. The planning process was smooth and the ideas recommended by Dee was excellent (ideas that we did not consider). Her workers were real gentlemen. The work was done timeously despite the rainy weather. Her prices are very competitive and you will get value for your money. We are thoroughly enjoying our \"new\" backyard. We are more than happy to recommend Hartscapes for your landscaping needs. Thanks Dee and team.",
+    author: "Yazied",
+    location: "Cape Town"
+  },
+  {
+    quote: "A job well done. The weather play a part which was a bit unfortunate taking a little longer for both parties. Very professional, the entire team were great always cleaned up after each shift. The guys removed half way down from the top to the middle of all three stumps. They will be back later this year to remove the rest of the palm stumps. Job well done so far",
+    author: "Rustim",
+    location: "Cape Town"
+  },
+  {
+    quote: "Excellent job, arrived on time, guys very pleasant. Did more than I asked and cleaned up after them. Very pleasant experience can definitely recommend.",
+    author: "L Robinson",
+    location: "Cape Town"
+  },
+  {
+    quote: "Dee was great and went beyond what she was asked to do! Thanks Dee",
+    author: "Crystal",
+    location: "Cape Town"
+  },
+  {
+    quote: "Immediate feedback via email. Visited me on a Tuesday and I received the quotation on the Friday. Reasonable fees. Good sense of what I want in and from my new garden.",
+    author: "M Engelbrecht",
+    location: "Cape Town"
+  },
+  {
+    quote: "The Treefelling team from Hartscape recently, came to remove a 10-12 meter tall Palm tree, they had limited space to work with and the task looked very difficult, but they did a fantastic job by not rushing and planning properly. There was no damage to anything, I am super happy with the work, would not think twice to use them again.",
+    author: "Robert",
+    location: "Cape Town"
   }
 ];
 
