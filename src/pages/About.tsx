@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Heart, Eye, Wrench, Leaf, Users, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const fadeIn = {
   hidden: { opacity: 0, y: 20 },
@@ -23,6 +24,34 @@ const staggerContainer = {
 };
 
 const About = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleContactClick = () => {
+    const scrollToContact = () => {
+      const element = document.querySelector('#contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        return true;
+      }
+      return false;
+    };
+
+    if (location.pathname === '/') {
+      scrollToContact();
+      return;
+    }
+
+    navigate('/');
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts += 1;
+      if (scrollToContact() || attempts > 20) {
+        clearInterval(interval);
+      }
+    }, 100);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -243,12 +272,13 @@ const About = () => {
             <p className="text-muted-foreground mb-8">
               Contact us today to discuss your project and discover how we can bring your vision to life.
             </p>
-            <a 
-              href="#contact" 
+            <button
+              type="button"
+              onClick={handleContactClick}
               className="inline-block px-8 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
             >
               Get in Touch
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>

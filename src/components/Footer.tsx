@@ -1,4 +1,5 @@
 import { Facebook, Instagram, Twitter, Linkedin } from "lucide-react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function BarkIcon({ size = 18 }: { size?: number }) {
   return (
@@ -17,6 +18,46 @@ function BarkIcon({ size = 18 }: { size?: number }) {
 }
 
 export default function Footer() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleQuickLink = (path: string) => {
+    const scrollToContact = () => {
+      const element = document.querySelector('#contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        return true;
+      }
+      return false;
+    };
+
+    if (path === '/#contact') {
+      if (location.pathname === '/') {
+        scrollToContact();
+        return;
+      }
+      navigate('/');
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts += 1;
+        if (scrollToContact() || attempts > 20) {
+          clearInterval(interval);
+        }
+      }, 100);
+      return;
+    }
+
+    navigate(path);
+  };
+
+  const quickLinks = [
+    { label: 'Home', path: '/' },
+    { label: 'About Us', path: '/about' },
+    { label: 'Services', path: '/services' },
+    { label: 'Projects', path: '/projects' },
+    { label: 'Contact', path: '/#contact' },
+  ];
+
   return (
     <footer className="bg-karoo-900 text-white pt-16 pb-8">
       <div className="container mx-auto px-4">
@@ -74,13 +115,17 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-3">
-              {['Home', 'About Us', 'Services', 'Projects', 'Contact'].map((item) => (
-                <li key={item}>
+              {quickLinks.map((item) => (
+                <li key={item.label}>
                   <a 
-                    href={`#${item.toLowerCase().replace(' ', '-')}`} 
+                    href={item.path}
                     className="text-gray-400 hover:text-white transition-colors duration-300"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleQuickLink(item.path);
+                    }}
                   >
-                    {item}
+                    {item.label}
                   </a>
                 </li>
               ))}
