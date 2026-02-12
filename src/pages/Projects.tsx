@@ -1,6 +1,6 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -27,6 +27,7 @@ export default function Projects() {
   const [activeIndex, setActiveIndex] = useState(0);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const location = useLocation();
   const carouselRef = useRef<HTMLDivElement>(null);
 
   // The canonical order of project folders to show (matches folders under public/gallery).
@@ -114,10 +115,28 @@ export default function Projects() {
   };
 
   const handleInquire = () => {
-    toast({
-      title: "Inquiry Sent",
-      description: `We've received your interest in ${activeProject?.title}. Our team will contact you soon.`,
-    });
+    const scrollToContact = () => {
+      const element = document.querySelector('#contact');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+        return true;
+      }
+      return false;
+    };
+
+    if (location.pathname === '/') {
+      scrollToContact();
+      return;
+    }
+
+    navigate('/');
+    let attempts = 0;
+    const interval = setInterval(() => {
+      attempts += 1;
+      if (scrollToContact() || attempts > 20) {
+        clearInterval(interval);
+      }
+    }, 100);
   };
 
   return (
