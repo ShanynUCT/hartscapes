@@ -85,7 +85,7 @@ export default function AboutSection() {
           
           <div>
             <h2 className="text-3xl md:text-4xl font-bold mb-6 font-display">
-              Landscaping with Drive and Passion Since 1999
+              Landscaping with Drive and Passion Since 2000
             </h2>
             
             <p className="text-muted-foreground mb-6">
