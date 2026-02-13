@@ -8,6 +8,6 @@ export const serviceComponents: Record<string, () => Promise<any>> = {
   "firepits-braais": () => import("./services/FirepitsBraais"),
   "retaining-walls": () => import("./services/RetainingWalls"),
   "brickwork": () => import("./services/StoneWalls"),
-  "paving-brickwork": () => import("./services/PavingBrickwork"),
+  "paving": () => import("./services/Paving"),
   "decking": () => import("./services/Decking"),
 };

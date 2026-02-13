@@ -46,9 +46,9 @@ export const services = [
     images: ["/images/stone1.jpg", "/images/stone2.jpg"],
   },
   {
-    title: "Paving & Brickwork",
-    slug: "paving-brickwork",
-    description: "Driveways, walkways, and patios built with quality paving and brickwork.",
+    title: "Paving",
+    slug: "paving",
+    description: "Driveways, walkways, and patios built with quality paving.",
     icon: "Grid3x3",
     images: ["/images/paving1.jpg", "/images/paving2.jpg"],
   },
