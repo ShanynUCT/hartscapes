@@ -2,6 +2,8 @@ import { motion } from "framer-motion";
 import { Heart, Eye, Wrench, Leaf, Users, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
+import BackToTop from "@/components/BackToTop";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const fadeIn = {
@@ -284,6 +286,8 @@ const About = () => {
       </section>
       
       <Footer />
+      <WhatsAppButton />
+      <BackToTop />
     </div>
   );
 };

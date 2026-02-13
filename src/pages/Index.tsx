@@ -9,6 +9,9 @@ import ProjectsSection from '@/components/ProjectsSection';
 import AboutSection from '@/components/AboutSection';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import BackToTop from '@/components/BackToTop';
+import SocialProof from '@/components/SocialProof';
 
 const Index = () => {
   const contentRef = useRef<HTMLDivElement>(null);
@@ -44,11 +47,15 @@ const Index = () => {
         <Navbar />
         <HeroSection />
         <ServicesSection />
+        <SocialProof />
         <ProjectsSection />
         <AboutSection />
         <ContactSection />
         <Footer />
       </div>
+      
+      <WhatsAppButton />
+      <BackToTop />
     </div>
   );
 };

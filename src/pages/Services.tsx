@@ -3,11 +3,14 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ServicesSection from '@/components/ServicesSection';
-import { Award, Users, Clock } from "lucide-react";
+import { Award, Users, Clock, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Card, CardContent } from "@/components/ui/card";
 import { useLocation, useNavigate } from 'react-router-dom';
+import WhatsAppButton from '@/components/WhatsAppButton';
+import BackToTop from '@/components/BackToTop';
+import SocialProof from '@/components/SocialProof';
 
 const testimonials = [
   {
@@ -180,43 +183,62 @@ export default function Services() {
         {/* Services Grid */}
         <ServicesSection />
 
+        {/* Social Proof Badges */}
+        <SocialProof />
+
         {/* Testimonials */}
-        <section className="py-20 bg-primary/5">
+        <section className="py-20 bg-gradient-to-b from-background to-muted/20">
           <div className="container mx-auto px-4">
-            <motion.div className="text-center max-w-3xl mx-auto mb-16" initial={{ y: 30, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
+            <motion.div className="text-center max-w-3xl mx-auto mb-12" initial={{ y: 30, opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
               <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display">What Our Clients Say</h2>
               <p className="text-muted-foreground">
                 Hear from our satisfied customers about their Hartscapes experience
               </p>
             </motion.div>
 
-            <Carousel opts={{ align: "start", loop: true }} className="w-full max-w-5xl mx-auto">
-              <CarouselContent>
-                {testimonials.map((t, i) => (
-                  <CarouselItem key={i} className="md:basis-1/2 lg:basis-1/2">
-                    <div className="p-4">
-                      <Card className="bg-card/80 backdrop-blur-sm border-primary/10 h-full">
-                        <CardContent className="pt-6">
-                          <div className="text-4xl text-primary font-serif mb-4">"</div>
-                          <p className="mb-6 italic text-lg">{t.quote}</p>
-                          <div className="flex items-center mt-4">
-                            <div className="w-10 h-10 rounded-full bg-primary/20 mr-3"></div>
-                            <div>
-                              <p className="font-bold">{t.author}</p>
-                              <p className="text-sm text-muted-foreground">{t.location}</p>
+            <div className="relative max-w-6xl mx-auto">
+              <Carousel opts={{ align: "start", loop: true }} className="w-full">
+                <CarouselContent className="-ml-4">
+                  {testimonials.map((t, i) => (
+                    <CarouselItem key={i} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                      <Card className="h-full border-none shadow-lg hover:shadow-xl transition-shadow bg-card">
+                        <CardContent className="p-6 flex flex-col h-full">
+                          {/* Star Rating */}
+                          <div className="flex gap-0.5 mb-3">
+                            {[...Array(5)].map((_, starIndex) => (
+                              <Star key={starIndex} className="h-4 w-4 fill-primary text-primary" />
+                            ))}
+                          </div>
+                          
+                          {/* Quote */}
+                          <p className="text-sm text-muted-foreground mb-4 flex-grow line-clamp-6">
+                            "{t.quote}"
+                          </p>
+                          
+                          {/* Author */}
+                          <div className="flex items-center gap-3 pt-4 border-t">
+                            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center font-bold text-primary text-sm">
+                              {t.author.split(' ').map(n => n[0]).join('')}
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-center gap-2 mb-0.5">
+                                <p className="font-semibold text-sm">{t.author}</p>
+                                <span className="text-[10px] bg-primary/10 text-primary px-1.5 py-0.5 rounded-full font-medium">✓</span>
+                              </div>
+                              <p className="text-xs text-muted-foreground">{t.location}</p>
                             </div>
                           </div>
                         </CardContent>
                       </Card>
-                    </div>
-                  </CarouselItem>
-                ))}
-              </CarouselContent>
-              <div className="flex justify-center mt-8 gap-2">
-                <CarouselPrevious className="relative static translate-y-0" />
-                <CarouselNext className="relative static translate-y-0" />
-              </div>
-            </Carousel>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+                
+                {/* Integrated Navigation Arrows */}
+                <CarouselPrevious className="absolute -left-4 top-1/2 -translate-y-1/2" />
+                <CarouselNext className="absolute -right-4 top-1/2 -translate-y-1/2" />
+              </Carousel>
+            </div>
           </div>
         </section>
 
@@ -232,7 +254,9 @@ export default function Services() {
             </motion.div>
           </div>
         </section>
-
+  <WhatsAppButton />
+      <BackToTop />
+    
         <Footer />
       </div>
     </div>

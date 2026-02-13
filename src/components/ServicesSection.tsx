@@ -2,17 +2,18 @@ import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/comp
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { services } from "@/data/servicesData";
-import { Leaf, Shovel, Droplets, Sprout, Flame, BrickWall, Hammer, Palette } from "lucide-react";
+import { Trees, Axis3d, Droplets, Waves, Flame, Mountain, Home, Grid3x3, BoxSelect } from "lucide-react";
 
 const iconsMap: Record<string, JSX.Element> = {
-  Leaf: <Leaf size={24} />,
-  Shovel: <Shovel size={24} />,
+  Trees: <Trees size={24} />,
+  Axis3d: <Axis3d size={24} />,
   Droplets: <Droplets size={24} />,
-  Sprout: <Sprout size={24} />,
+  Waves: <Waves size={24} />,
   Flame: <Flame size={24} />,
-  BrickWall: <BrickWall size={24} />,
-  Hammer: <Hammer size={24} />,
-  Palette: <Palette size={24} />,
+  Mountain: <Mountain size={24} />,
+  Home: <Home size={24} />,
+  Grid3x3: <Grid3x3 size={24} />,
+  BoxSelect: <BoxSelect size={24} />,
 };
 
 export default function ServicesSection() {
@@ -36,7 +37,7 @@ export default function ServicesSection() {
               style={{ animationDelay: `${index * 150}ms` }}
             >
               <CardHeader>
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center text-primary mb-4 group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground group-hover:scale-110 transition-all duration-300 shadow-sm">
                   {iconsMap[service.icon]}
                 </div>
                 <CardTitle className="text-xl font-display">{service.title}</CardTitle>

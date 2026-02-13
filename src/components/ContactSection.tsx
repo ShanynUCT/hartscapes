@@ -3,11 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card } from "@/components/ui/card";
-import { MapPin, Phone, Mail, Clock, Users } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Users, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function ContactSection() {
   const { toast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,11 +20,47 @@ export default function ContactSection() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: '' }));
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    }
+    
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email';
+    }
+    
+    if (!formData.message.trim()) {
+      newErrors.message = 'Message is required';
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = 'Message must be at least 10 characters';
+    }
+    
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // In a real application, you would submit the form data to your backend here
+    
+    if (!validateForm()) {
+      return;
+    }
+    
+    setSubmitting(true);
+    
+    // Simulate API call
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
     console.log('Form submitted:', formData);
     
     toast({
@@ -37,6 +75,8 @@ export default function ContactSection() {
       phone: '',
       message: ''
     });
+    setErrors({});
+    setSubmitting(false);
   };
 
   return (
@@ -74,11 +114,15 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold">Call Us</h4>
-                      <p className="text-muted-foreground mt-1">
-                        <a href="tel:+27822923908" className="hover:text-primary transition-colors">
+                      <Button 
+                        variant="link" 
+                        className="h-auto p-0 text-muted-foreground hover:text-primary"
+                        asChild
+                      >
+                        <a href="tel:+27822923908">
                           +27 82 292 3908
                         </a>
-                      </p>
+                      </Button>
                     </div>
                   </div>
                   
@@ -88,11 +132,15 @@ export default function ContactSection() {
                     </div>
                     <div>
                       <h4 className="font-semibold">Email Us</h4>
-                      <p className="text-muted-foreground mt-1">
-                        <a href="mailto:Dee@hartscapes.co.za" className="hover:text-primary transition-colors">
+                      <Button 
+                        variant="link" 
+                        className="h-auto p-0 text-muted-foreground hover:text-primary"
+                        asChild
+                      >
+                        <a href="mailto:Dee@hartscapes.co.za">
                           Dee@hartscapes.co.za
                         </a>
-                      </p>
+                      </Button>
                     </div>
                   </div>
                   
@@ -147,21 +195,24 @@ export default function ContactSection() {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="name" className="text-sm font-medium">
-                        Name
+                        Name <span className="text-destructive">*</span>
                       </label>
                       <Input 
                         id="name" 
                         name="name" 
                         placeholder="Your name" 
                         value={formData.name} 
-                        onChange={handleChange} 
-                        required 
+                        onChange={handleChange}
+                        className={errors.name ? 'border-destructive' : ''}
                       />
+                      {errors.name && (
+                        <p className="text-sm text-destructive">{errors.name}</p>
+                      )}
                     </div>
                     
                     <div className="space-y-2">
                       <label htmlFor="email" className="text-sm font-medium">
-                        Email
+                        Email <span className="text-destructive">*</span>
                       </label>
                       <Input 
                         id="email" 
@@ -169,9 +220,12 @@ export default function ContactSection() {
                         type="email" 
                         placeholder="Your email" 
                         value={formData.email} 
-                        onChange={handleChange} 
-                        required 
+                        onChange={handleChange}
+                        className={errors.email ? 'border-destructive' : ''}
                       />
+                      {errors.email && (
+                        <p className="text-sm text-destructive">{errors.email}</p>
+                      )}
                     </div>
                   </div>
                   
@@ -190,7 +244,7 @@ export default function ContactSection() {
                   
                   <div className="space-y-2">
                     <label htmlFor="message" className="text-sm font-medium">
-                      Message
+                      Message <span className="text-destructive">*</span>
                     </label>
                     <Textarea 
                       id="message" 
@@ -198,16 +252,27 @@ export default function ContactSection() {
                       placeholder="Tell us about your project" 
                       value={formData.message} 
                       onChange={handleChange} 
-                      rows={5} 
-                      required 
+                      rows={5}
+                      className={errors.message ? 'border-destructive' : ''}
                     />
+                    {errors.message && (
+                      <p className="text-sm text-destructive">{errors.message}</p>
+                    )}
                   </div>
                   
                   <Button 
                     type="submit" 
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
+                    disabled={submitting}
                   >
-                    Send Message
+                    {submitting ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Sending...
+                      </>
+                    ) : (
+                      'Send Message'
+                    )}
                   </Button>
                 </form>
               </div>

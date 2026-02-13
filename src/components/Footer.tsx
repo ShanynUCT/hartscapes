@@ -174,10 +174,32 @@ export default function Footer() {
           </div>
         </div>
         
-        <div className="border-t border-gray-800 pt-8 mt-8 text-center">
-          <p className="text-gray-400">
-            © {new Date().getFullYear()} Hartscapes. All rights reserved.
-          </p>
+        <div className="border-t border-gray-800 pt-8 mt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400">
+              © {new Date().getFullYear()} Hartscapes. All rights reserved.
+            </p>
+            <div className="flex gap-4">
+              <a 
+                href="https://www.facebook.com/hartscapes" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook size={20} />
+              </a>
+              <a 
+                href="https://www.instagram.com/hartscapes" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-300"
+                aria-label="Instagram"
+              >
+                <Instagram size={20} />
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </footer>

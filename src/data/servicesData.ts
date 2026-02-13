@@ -3,7 +3,7 @@ export const services = [
     title: "Landscape Design",
     slug: "landscape-design",
     description: "Custom garden and landscape designs tailored to your outdoor space in Cape Town.",
-    icon: "Leaf", // optional, used in ServicesSection
+    icon: "Trees", // optional, used in ServicesSection
     images: [
       "/images/landscape1.jpg",
       "/images/landscape2.jpg",
@@ -14,14 +14,14 @@ export const services = [
     title: "Pergolas",
     slug: "pergolas",
     description: "Beautiful and durable pergolas to enhance your outdoor living areas.",
-    icon: "Shovel",
+    icon: "Axis3d",
     images: ["/images/pergola1.jpg", "/images/pergola2.jpg"],
   },
   {
     title: "Water Features",
     slug: "water-features",
     description: "Custom fountains, ponds, and other water features to elevate your garden.",
-    icon: "Sprout",
+    icon: "Waves",
     images: ["/images/water1.jpg", "/images/water2.jpg"],
   },
   {
@@ -35,28 +35,28 @@ export const services = [
     title: "Retaining Walls",
     slug: "retaining-walls",
     description: "Durable retaining walls to protect and define your landscape.",
-    icon: "BrickWall",
+    icon: "Mountain",
     images: ["/images/retaining1.jpg", "/images/retaining2.jpg"],
   },
   {
     title: "Brickwork",
     slug: "brickwork",
     description: "Expertly crafted brickwork and masonry to add structure and beauty to your property.",
-    icon: "Hammer",
+    icon: "Home",
     images: ["/images/stone1.jpg", "/images/stone2.jpg"],
   },
   {
     title: "Paving & Brickwork",
     slug: "paving-brickwork",
     description: "Driveways, walkways, and patios built with quality paving and brickwork.",
-    icon: "Palette",
+    icon: "Grid3x3",
     images: ["/images/paving1.jpg", "/images/paving2.jpg"],
   },
   {
     title: "Decking",
     slug: "decking",
     description: "Custom timber decks to create inviting outdoor living spaces.",
-    icon: "Sprout",
+    icon: "BoxSelect",
     images: ["/images/deck1.jpg", "/images/deck2.jpg"],
   },
 ];
