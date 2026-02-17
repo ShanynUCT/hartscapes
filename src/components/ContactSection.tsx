@@ -7,6 +7,8 @@ import { MapPin, Phone, Mail, Clock, Users, Loader2 } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
 
 export default function ContactSection() {
+  const formEndpoint = 'https://formspree.io/f/meelkrwz';
+  const formSubject = 'Requested Quote from Website';
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -57,26 +59,46 @@ export default function ContactSection() {
     }
     
     setSubmitting(true);
-    
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    
-    console.log('Form submitted:', formData);
-    
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for contacting Hartscapes. Dee and the team will get back to you soon.",
-    });
-    
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      message: ''
-    });
-    setErrors({});
-    setSubmitting(false);
+
+    try {
+      const response = await fetch(formEndpoint, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          ...formData,
+          _subject: formSubject
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Form submission failed');
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for contacting Hartscapes. Dee and the team will get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: ''
+      });
+      setErrors({});
+    } catch (error) {
+      toast({
+        title: "Message not sent",
+        description: "Please try again or email Dee directly at Dee@hartscapes.co.za.",
+        variant: "destructive"
+      });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
