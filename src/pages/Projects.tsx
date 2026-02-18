@@ -38,6 +38,7 @@ export default function Projects() {
     "Capri",
     "Claremont",
     "Hout Bay",
+    "Kalk Bay",
     "Newlands",
     "Somerset West",
     "Wynberg"
