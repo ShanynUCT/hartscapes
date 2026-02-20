@@ -1,58 +1,79 @@
-import { Card, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Card } from "@/components/ui/card";
 import { useNavigate } from "react-router-dom";
 import { services } from "@/data/servicesData";
-import { Trees, Axis3d, Droplets, Waves, Flame, Mountain, Home, Grid3x3, BoxSelect } from "lucide-react";
+import { 
+  Trees, Axis3d, Droplets, Waves, Flame, 
+  Mountain, Home, Grid3x3, BoxSelect, ArrowUpRight 
+} from "lucide-react";
 
+// Icons sized up slightly for the larger cards
 const iconsMap: Record<string, JSX.Element> = {
-  Trees: <Trees size={24} />,
-  Axis3d: <Axis3d size={24} />,
-  Droplets: <Droplets size={24} />,
-  Waves: <Waves size={24} />,
-  Flame: <Flame size={24} />,
-  Mountain: <Mountain size={24} />,
-  Home: <Home size={24} />,
-  Grid3x3: <Grid3x3 size={24} />,
-  BoxSelect: <BoxSelect size={24} />,
+  Trees: <Trees size={22} />,
+  Axis3d: <Axis3d size={22} />,
+  Droplets: <Droplets size={22} />,
+  Waves: <Waves size={22} />,
+  Flame: <Flame size={22} />,
+  Mountain: <Mountain size={22} />,
+  Home: <Home size={22} />,
+  Grid3x3: <Grid3x3 size={22} />,
+  BoxSelect: <BoxSelect size={22} />,
 };
 
 export default function ServicesSection() {
   const navigate = useNavigate();
 
   return (
-    <section id="services" className="py-20 relative">
+    <section id="services" className="py-24 relative overflow-hidden bg-background">
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display">Our Landscaping Services</h2>
-          <p className="text-muted-foreground">
-            Comprehensive landscaping solutions tailored to South Africa's unique climate and native flora.
-          </p>
+        
+        {/* Header */}
+        <div className="text-center mb-16">
+          <span className="text-xs font-bold tracking-[0.3em] text-primary uppercase mb-3 block">Our Expertise</span>
+          <h2 className="text-3xl md:text-4xl font-bold font-display tracking-tight">Landscaping Solutions</h2>
+          <div className="h-1 w-12 bg-gradient-to-r from-primary to-accent mx-auto mt-4 rounded-full" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Compact but Sized-Up Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 max-w-6xl mx-auto">
           {services.map((service, index) => (
-            <Card 
+            <motion.div
               key={service.slug}
-              className="group hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
-              style={{ animationDelay: `${index * 150}ms` }}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
             >
-              <CardHeader>
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center text-primary mb-4 group-hover:from-primary group-hover:to-accent group-hover:text-primary-foreground group-hover:scale-110 transition-all duration-300 shadow-sm">
+              <Card 
+                onClick={() => navigate(`/services/${service.slug}`)}
+                className="group relative flex items-center gap-5 p-5 cursor-pointer bg-card/30 backdrop-blur-md border-primary/10 hover:border-primary/40 hover:bg-card/60 transition-all duration-500 rounded-2xl shadow-sm hover:shadow-md"
+              >
+                {/* Subtle Hover Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                {/* Sized-up Icon Container (12x12 instead of 10x10) */}
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-primary/5 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500 shadow-inner">
                   {iconsMap[service.icon]}
                 </div>
-                <CardTitle className="text-xl font-display">{service.title}</CardTitle>
-                <CardDescription className="text-muted-foreground">{service.description}</CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <Button
-                  variant="ghost"
-                  className="p-0 hover:bg-transparent hover:text-primary"
-                  onClick={() => navigate(`/services/${service.slug}`)}
-                >
-                  Learn More
-                </Button>
-              </CardFooter>
-            </Card>
+                
+                {/* Text Content */}
+                <div className="flex flex-col flex-1 min-w-0">
+                  <h3 className="text-base font-bold tracking-tight group-hover:text-primary transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                  <div className="flex items-center gap-1.5 mt-0.5">
+                    <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-widest group-hover:text-foreground transition-colors duration-300">
+                      Explore
+                    </span>
+                    <ArrowUpRight 
+                      size={12} 
+                      className="text-primary opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all duration-300" 
+                    />
+                  </div>
+                </div>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>

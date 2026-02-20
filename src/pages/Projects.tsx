@@ -11,6 +11,7 @@ import BackToTop from '@/components/BackToTop';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useToast } from '@/components/ui/use-toast';
+import { projectDescriptions } from '@/data/projectsData';
 
 interface Project {
   id: number;
@@ -34,6 +35,7 @@ export default function Projects() {
 
   // The canonical order of project folders to show (matches folders under public/gallery).
   const galleryFolders = [
+    "Edgemead",
     "Blouberg",
     "Capri",
     "Claremont",
@@ -67,12 +69,13 @@ export default function Projects() {
           const files = index[folderName] || [];
           const hasFiles = files.length > 0;
           const imageUrl = hasFiles ? files[0] : PLACEHOLDER_SVG;
+          const customDescription = projectDescriptions[folderName];
           return {
             id: idx + 1,
-            title: folderName.replace(/[-_]/g, ' '),
-            description: `Project: ${folderName} — portfolio images from our work in ${folderName}.`,
-            location: 'Cape Town',
-            year: '2024',
+            title: customDescription?.title || folderName.replace(/[-_]/g, ' '),
+            description: customDescription?.description || `Project: ${folderName} — portfolio images from our work in ${folderName}.`,
+            location: customDescription?.location || 'Cape Town',
+            year: customDescription?.year || '2025',
             category: 'Residential',
             imageUrl,
             gallery: hasFiles ? files : [],
@@ -85,16 +88,19 @@ export default function Projects() {
       .catch((err) => {
         // fallback: build lightweight projects array with best-effort cover paths
         console.warn('Could not load gallery index.json:', err);
-        const fallback = galleryFolders.map((folderName, idx) => ({
-          id: idx + 1,
-          title: folderName.replace(/[-_]/g, ' '),
-          description: `Project: ${folderName} — portfolio images from our work in ${folderName}.`,
-          location: 'Cape Town',
-          year: '2024/5',
-          category: 'Residential',
-          imageUrl: PLACEHOLDER_SVG,
-          gallery: [],
-        } as Project));
+        const fallback = galleryFolders.map((folderName, idx) => {
+          const customDescription = projectDescriptions[folderName];
+          return {
+            id: idx + 1,
+            title: customDescription?.title || folderName.replace(/[-_]/g, ' '),
+            description: customDescription?.description || `Project: ${folderName} — portfolio images from our work in ${folderName}.`,
+            location: customDescription?.location || 'Cape Town',
+            year: customDescription?.year || '2025/6',
+            category: 'Residential',
+            imageUrl: PLACEHOLDER_SVG,
+            gallery: [],
+          } as Project;
+        });
         if (mounted) {
           setProjects(fallback);
           setActiveProject(fallback[0] || null);
@@ -312,9 +318,9 @@ export default function Projects() {
                             <span className="w-1 h-6 bg-primary rounded-full"></span>
                             Project Details
                           </h3>
-                          <p className="text-muted-foreground leading-relaxed mb-6">
+                          <div className="text-muted-foreground leading-relaxed mb-6 whitespace-pre-wrap">
                             {activeProject.description}
-                          </p>
+                          </div>
                           
                           <Button 
                             size="lg"
