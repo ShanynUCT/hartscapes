@@ -137,8 +137,7 @@ const About = () => {
                 Crafting Dreams Into Reality
               </h2>
               <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
-                Led by Dee Hart, our team of dedicated professionals, including Robert, Simba, Trust, Jones, Tyson, Gibson, and Destiny, 
-                are passionate about crafting landscapes that reflect our clients' dreams. 
+                Led by Dee Hart, our team of dedicated professionals, including Trust, Gibson, Robert, Simba, Jones, Destiny, Joshua, Tyson, and Obey, are passionate about crafting landscapes that reflect our clients' dreams. 
                 Our commitment ensures no job is too big or too small.
               </p>
               <p className="text-muted-foreground mb-8 text-lg leading-relaxed">
